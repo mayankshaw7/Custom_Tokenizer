@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Custom Tokenizer</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Custom Tokenizer</h1>
+
+      <div class="panel">
+        <label for="inputText"><strong>Input text</strong></label>
+
+        <textarea
+          id="inputText"
+          placeholder="Type or paste text here..."
+        ></textarea>
+
+        <div class="options">
+          <label>
+            <input type="radio" name="mode" value="word" checked />
+            Word tokenizer
+          </label>
+
+          <label>
+            <input type="radio" name="mode" value="char" />
+            Character tokenizer
+          </label>
+
+          <label>
+            <input type="radio" name="mode" value="sentence" />
+            Sentence tokenizer
+          </label>
+        </div>
+
+        <div class="controls">
+          <button id="tokenizeBtn">Tokenize</button>
+          <button id="clearBtn" class="secondary">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel results">
+        <label><strong>Tokens</strong></label>
+        <pre id="outputTokens" class="output">[]</pre>
+
+        <label><strong>Token count</strong></label>
+        <div id="tokenCount" class="count">0</div>
+
+        <label><strong>Raw JSON</strong></label>
+        <pre id="rawJson" class="output">{}</pre>
+      </div>
+
+      <footer
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 20px;
+          color: #050607;
+        "
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 12l-9-9-9 9 9 9 9-9z"></path>
+          <path d="M9 12h6"></path>
+        </svg>
+
+        <span>
+          Word, Character and Sentence Tokenizer
+        </span>
+      </footer>
+    </div>
+
+    <script>
+      async function tokenize(mode, text) {
+        const resp = await fetch("/tokenize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mode, text }),
+        });
+
+        return resp.json();
+      }
+
+      document
+        .getElementById("tokenizeBtn")
+        .addEventListener("click", async () => {
+          const text = document.getElementById("inputText").value;
+
+          const mode = document.querySelector(
+            'input[name="mode"]:checked'
+          ).value;
+
+          const result = await tokenize(mode, text);
+
+          document.getElementById("outputTokens").textContent =
+            JSON.stringify(result.tokens, null, 2);
+
+          document.getElementById("tokenCount").textContent =
+            result.count;
+
+          document.getElementById("rawJson").textContent =
+            JSON.stringify(result, null, 2);
+        });
+
+      document
+        .getElementById("clearBtn")
+        .addEventListener("click", () => {
+          document.getElementById("inputText").value = "";
+          document.getElementById("outputTokens").textContent = "[]";
+          document.getElementById("tokenCount").textContent = "0";
+          document.getElementById("rawJson").textContent = "{}";
+        });
+    </script>
+  </body>
+</html>

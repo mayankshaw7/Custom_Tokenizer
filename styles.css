@@ -1,0 +1,153 @@
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --muted: #121314;
+    --accent: #4f46e5;
+    --glass: rgba(255, 255, 255, 0.03);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html,
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    /* rgb(235, 248, 255) to rgb(255, 255, 255) */
+    background: linear-gradient(135deg, rgb(199, 170, 62) 0%, rgba(139, 6, 180, 0.345) 100%);
+    color: rgb(30, 41, 59);
+}
+
+.container {
+    max-width: 920px;
+    margin: 40px auto;
+    padding: 28px;
+    background: var(--glass);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+h1 {
+    margin: 0 0 18px;
+    font-size: 22px;
+    color: #fff;
+}
+
+.panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+textarea#inputText {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(236, 240, 238, 0.04);
+    background:#020618;
+    color: white;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.options {
+    margin-top: 12px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    color: var(--muted);
+}
+
+.controls {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    background: var(--accent);
+    border: 0;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button.secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.results .output {
+    background: #020618;
+    padding: 12px;
+    border-radius: 8px;
+    color: #cfe6ff;
+    max-height: 300px;
+    overflow: auto;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.count {
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--muted);
+}
+
+footer {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+#tokenizeBtn {
+    /* Starting Color: A medium Purple */
+    background-color: #8b5cf6; 
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    /* THE KEY: This handles the color change 'entering' AND 'exiting' */
+    transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+}
+
+#tokenizeBtn:hover {
+    /* Target Color: Your original Indigo (#4f46e5) */
+    background-color: #4f46e5; 
+    
+    /* Adds a little 'pop' while entering */
+    transform: scale(1.05); 
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+#clearBtn {
+    background-color: #fff1f2; /* Very light red */
+    color: #e11d48;            /* Rose/Red text */
+    border: 1px solid #fecdd3;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#clearBtn:hover {
+    background-color: #e11d48;
+    color: white;
+    transform: translateY(-1px);
+    /* Soft red glow */
+    box-shadow: 0 10px 15px -3px rgba(225, 29, 72, 0.3), 
+                0 4px 6px -2px rgba(225, 29, 72, 0.1);
+}
